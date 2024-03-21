@@ -12,4 +12,4 @@ The source of the KL controller for the inverted pendulum problem.
 
 [0]: https://arxiv.org/abs/ (To appear)
 
-\[1\]: ["Variational Dynamic Programming for Stochastic Optimal Control.  Marc Lambert, Francis Bach, Silvère Bonnabel "][4] 
+\[1\]: ["Variational Dynamic Programming for Stochastic Optimal Control.  Marc Lambert, Francis Bach, Silvère Bonnabel.Submitted to IEEE CDC 2024 "][4] 
