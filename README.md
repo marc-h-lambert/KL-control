@@ -2,7 +2,7 @@
 
 ## Object
 
-This is the companion code for the paper \[[1][0]\]. Please cite this paper if you use this code.  
+This is the companion code for the paper \[[1] (To appear) \]. Please cite this paper if you use this code.  
 
 ## Installation
 The code is available in python using the standard library. 
