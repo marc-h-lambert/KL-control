@@ -1,4 +1,5 @@
-# Variational approximation of an entropic regularized policy (KL-control)
+# Variational Dynamic Programming for Stochastic Optimal Control
+# Authors: Marc Lambert, Francis Bach, Silvère Bonnabel  
 
 ## Object
 
@@ -10,6 +11,6 @@ The code is available in python using the standard library.
 ## python files
 The source of the KL controller for the inverted pendulum problem.
 
-[0]: https://arxiv.org/abs/
+[0]: https://arxiv.org/abs/ (To appear)
 
-\[1\]: ["Variational approximation of an entropic regularized policy"][4] 
+\[1\]: ["Variational Dynamic Programming for Stochastic Optimal Control"][4] 
