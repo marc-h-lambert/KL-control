@@ -30,11 +30,11 @@ which takes the form $X_{k+1} =\mathcal{A}X_k+ \mathcal{B}u_k+\nu_k$ where $X_k=
 
 ## Model of the controller
 The controller is minimizing the finite-time continuous loss: $\int_0^T \ell(x_t,p_t,u_t,t)dt +V_T(x_T,p_T)$ which writes in discrete-time state-space represntation with a step $\mathrm{dt}$ where $N\mathrm{dt}=T$:
-$$\sum_{k=0}^N \ell(X_k,u_k,k) \mathrm{dt} + V_N(X_N)$$
+$$\sum_{k=0}^{N-1} \ell(X_k,u_k,k) \mathrm{dt} + V_N(X_N)$$
 
 ### LQR case:
 In the LQR case the loss is:
-$$\sum_{k=0}^N X_k^TQX_k \mathrm{dt}+u_k^TRu_k \mathrm{dt} + X_N^TV_NX_N$$
+$$\sum_{k=0}^{N-1} X_k^TQX_k \mathrm{dt}+u_k^TRu_k \mathrm{dt} + X_N^TV_NX_N$$
 
 ## python files
 The source of the KL controller for the inverted pendulum problem.
