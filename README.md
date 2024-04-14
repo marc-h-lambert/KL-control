@@ -36,8 +36,12 @@ $$\sum_{k=0}^{N-1} \ell(X_k,u_k,k\mathrm{dt}) \mathrm{dt} + V_N(X_N)$$
 
 ### LQR case:
 In the LQR case the loss is:
-$$\sum_{k=0}^{N-1} (X_k^T Q X_k+u_k^TR   u_k)\mathrm{dt} + X_N^TV_NX_N$$
-
+$$\sum_{k=0}^{N-1} (X_k^T Q X_k+u_k^TR   u_k)\mathrm{dt} + X_N^TV_NX_N,$$
+where
+- $Q \in \mathcal{M}(2d \times 2d)$ is the matrix of the state-cost quadratic form
+- $R \in \mathcal{M}(m \times m)$ is the matrix of the control-cost quadratic form
+- $V_N \in \mathcal{M}(2d \times 2d)$ is the matrix of the final state-cost (or final Value) quadratic form.
+  
 ## python files
 The source of the KL controller for the inverted pendulum problem.
 
