@@ -12,7 +12,7 @@ The code is available in python using the standard library.
 The stochastic dynamic is described by a Langevin SDE with a Brownian motion $W_t$ supposed to disrupt acceleration:
 $$dv_t=a_tdt=f(x_t,v_t)dt +B_pu_tdt+L\sqrt{C}dW_t; \quad dx_t=v_tdt,$$
 where 
-- $x_t,v_t,a_t \in \mathbb{R}^d$ are the position, velocity and acceleration vectors (we use in the code the momentum notation v_t:=p_t)
+- $x_t,v_t,a_t \in \mathbb{R}^d$ are the position, velocity and acceleration vectors (we use in the code the momentum notation p_t:=v_t)
 - $f:\mathbb{R}^d\times \mathbb{R}^d \rightarrow \mathbb{R}^d$ is the dynamic
 - $u_t \in \mathbb{R}^p$ is the control vector with $p \leq d$
 - $W_t \in \mathbb{R}^m$ is the noise vector with $m \leq d$
