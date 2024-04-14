@@ -30,7 +30,7 @@ which takes the form $X_{k+1} =\mathcal{A}X_k+ \mathcal{B}u_k+\nu_k$ where $X_k=
 
 ## Model of the controller
 The controller is minimizing the finite-time continuous loss: $\int_0^T \ell(x_t,p_t,u_t,t)dt +V_T(x_T,p_T)$ which writes in discrete-time state-space representation with a step $\mathrm{dt}$ and with $N:=T/\mathrm{dt}$:
-$$\sum_{k=0}^{N-1} \ell(X_k,u_k,k) \mathrm{dt} + V_N(X_N)$$
+$$\sum_{k=0}^{N-1} \ell(X_k,u_k,k\mathrm{dt}) \mathrm{dt} + V_N(X_N)$$
 
 ### LQR case:
 In the LQR case the loss is:
