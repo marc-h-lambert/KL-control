@@ -23,7 +23,7 @@ The dynamic is integrated with a step $\mathrm{dt}$ with a semi-implicit scheme:
 $$v_{k+1}=v_k+f(x_k,v_k)\mathrm{dt}+Bu_k\mathrm{dt}+Lw_k; \quad x_{k+1}=x_k+v_{k+1}\mathrm{dt}; \quad w_k \sim \mathcal{N}(0,C\mathrm{dt})$$
 
 Particular case:
-In the linear case, we have $f(x_t,v_t)=F \pmatrix{x_t \n v_t}$
+In the linear case, we have $f(x_t,v_t)=F \pmatrix{x_t \\\ v_t}$
 
 ## Model of the controller
 The controller is minimizing
