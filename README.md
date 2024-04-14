@@ -7,7 +7,7 @@ This is the companion code for the paper \[[1] (To appear) \]. Please cite this 
 ## Installation
 The code is available in python using the standard library. 
 
-## Model
+## Model of the stochastic dynamic
 The stochastic dynamic is described by a Langevin SDE with a Brownian motion $W_t$ on the acceleration $a_t$:
 $$dv_t=a_tdt=f(x_t,v_t)dt +Bu_tdt+L\sqrt{C}dW_t; \quad dx_t=v_tdt,$$
 where 
@@ -21,6 +21,12 @@ where
   
 The dynamic is integrated with a step $\mathrm{dt}$ with a semi-implicit scheme:
 $$v_{k+1}=v_k+f(x_k,v_k)\mathrm{dt}+Bu_k\mathrm{dt}+Lw_k; \quad x_{k+1}=x_k+v_{k+1}\mathrm{dt}; \quad w_k \sim \mathcal{N}(0,C\mathrm{dt})$$
+
+Particular case:
+In the linear case, we have $f(x_t,v_t)=F \pmatrix{x_t,v_t)}$
+
+## Model of the controller
+The controller is minimizing
 
 ## python files
 The source of the KL controller for the inverted pendulum problem.
