@@ -8,6 +8,7 @@ This is the companion code for the paper \[[1] (To appear) \]. Please cite this 
 The code is available in python using the standard library. 
 
 ## Model of the stochastic dynamic
+### Affince control:
 The stochastic dynamic is described by a Langevin SDE with a Brownian motion $W_t$ on the acceleration $a_t$:
 $$dv_t=a_tdt=f(x_t,v_t)dt +Bu_tdt+L\sqrt{C}dW_t; \quad dx_t=v_tdt,$$
 where 
