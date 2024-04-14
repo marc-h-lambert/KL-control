@@ -30,7 +30,7 @@ which takes the form $\pmatrix{x_{k+1} \\\ v_{k+1}}=\mathcal{A}\pmatrix{x_{k} \\
 
 ## Model of the controller
 The controller is minimizing the finite-time continuous loss: $\int_0^T \ell(x_t,u_t,t)dt +V_T(x_T)$ which writes in discrete-time with a step $\mathrm{dt}$ where $N\mathrm{dt}=T$:
-$$\sum_{k=O}^N \ell(x_k,u_k,k) \mathrm{dt} + V_N(x_N)$$
+$$\sum_{k=0}^N \ell(x_k,u_k,k) \mathrm{dt} + V_N(x_N)$$
 
 ## python files
 The source of the KL controller for the inverted pendulum problem.
