@@ -19,7 +19,7 @@ where
 - $L \in \mathcal{M}(d \times m)$ is the noise matrix (acceleration-channel where enter the noise).
   
 The dynamic is integrated with a step $\mathrm{dt}$ with a semi-implicit scheme:
-$$v_{k+1}=v_k+f(x_t,v_t)\rm{dt}+Bu_t\mathrm{dt}+Lw_t; \quad x_{k+1}=x_k+v_{k+1}\mathrm{dt}; \quad w_t \sim \mathcal{N}(0,C\mathrm{dt})$$
+$$v_{k+1}=v_k+f(x_k,v_k)\mathrm{dt}+Bu_t\mathrm{dt}+Lw_k; \quad x_{k+1}=x_k+v_{k+1}\mathrm{dt}; \quad w_k \sim \mathcal{N}(0,C\mathrm{dt})$$
 
 ## python files
 The source of the KL controller for the inverted pendulum problem.
