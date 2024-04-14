@@ -8,9 +8,9 @@ This is the companion code for the paper \[[1] (To appear) \]. Please cite this 
 The code is available in python using the standard library. 
 
 ## Model
-The dynamic is encoded in a Langevin SDE with a Brownian motion $W_t$ on the acceleration subspace ($dim(W_)t=m \leq dim(a_t)=d$):
-$$dv_t=a_tdt=f(x_t,v_t,u_t)dt+L\sqrt{C}dW_t; \quad dx_t=v_tdt$$
-which is discretized using a semin-implicit scheme as follows:
+The dynamic is encoded in a Langevin SDE with a Brownian motion $W_t$ on the acceleration subspace ($dim(W_t)=m \leq dim(a_t)=d$):
+$$dv_t=a_tdt=f(x_t,v_t,u_t)dt+L\sqrt{C}dW_t; \quad dx_t=v_tdt,$$
+where $L \in \mathcal{M}(d \times m)$ and $C \in \mathcal{M}(m \times m)$ which is discretized using a semin-implicit scheme as follows:
 $$v_{k+1}=v_k+f(x_t,v_t,u_t)\delta t+Lw_t; \quad x_{k+1}=x_k+v_{k+1}\delta t; \quad w_t \mathcal{N}(0,C)$$
 
 ## python files
