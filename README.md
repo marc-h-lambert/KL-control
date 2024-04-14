@@ -24,7 +24,7 @@ The dynamic is integrated with a step $\mathrm{dt}$ with a semi-implicit scheme:
 $$v_{k+1}=v_k+f(x_k,v_k)\mathrm{dt}+Bu_k\mathrm{dt}+Lw_k; \quad x_{k+1}=x_k+v_{k+1}\mathrm{dt}; \quad w_k \sim \mathcal{N}(0,C\mathrm{dt})$$
 
 ### Linear case:
-in the linear case we have $f(x_t,v_t)=F \pmatrix{x_t \\\ v_t}$ where $F \in \mathcal{M}(d \times 2d)$ and the corresponding discrete-time state-space representation is:
+In the linear case we have $f(x_t,v_t)=F \pmatrix{x_t \\\ v_t}$ where $F \in \mathcal{M}(d \times 2d)$ and the corresponding discrete-time state-space representation is:
 $$\pmatrix{x_{k+1} \\\ v_{k+1}}= \pmatrix{x_{k} \\\ v_{k}} + \pmatrix{ (0, I_d) \\\ F }  \pmatrix{x_{k} \\\ v_{k}}\mathrm{dt} + \pmatrix{(0) \\\ B }  u_k \mathrm{dt} +\pmatrix{(0) \\\ Lw_k},$$
 which takes the form $\pmatrix{x_{k+1} \\\ v_{k+1}}=\mathcal{A}\pmatrix{x_{k} \\\ v_{k}}+ \mathcal{B}u_k+\nu_k$ where $\mathcal{A}=I_{2d} + \pmatrix{ (0, I_d) \\\ F }\mathrm{dt}$,  $\mathcal{B}=\pmatrix{(0) \\\ B} \mathrm{dt}$ and $\nu_k=\pmatrix{(0) \\\ Lw_k}$.
 
