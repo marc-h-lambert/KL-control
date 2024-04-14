@@ -9,7 +9,7 @@ The code is available in python using the standard library.
 
 ## Model
 The dynamic is encoded in a Langevin SDE of the form:
-$$dv_t=f(x_t,v_t,u_t)dt+Ldw_t; \quad dx_t=v_tdt; w_t \mathcal{0,C}$$
+$$dv_t=f(x_t,v_t,u_t)dt+Ldw_t; \quad dx_t=v_tdt; w_t \mathcal{N}(0,C)$$
 
 ## python files
 The source of the KL controller for the inverted pendulum problem.
