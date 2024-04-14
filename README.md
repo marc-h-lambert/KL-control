@@ -18,7 +18,7 @@ where
 - $C \in \mathcal{M}(m \times m)$ is the covariance of the noise
 - $L \in \mathcal{M}(d \times m)$ is the noise matrix (acceleration-channel where enter the noise).
   
-The dynamic is integrated with a step $\mathcal{dt}$ with a semi-implicit scheme:
+The dynamic is integrated with a step $\rm{dt}$ with a semi-implicit scheme:
 $$v_{k+1}=v_k+f(x_t,v_t)dt+Bu_tdt+Lw_t; \quad x_{k+1}=x_k+v_{k+1}dt; \quad w_t \sim \mathcal{N}(0,C)$$
 
 ## python files
