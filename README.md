@@ -17,8 +17,9 @@ where
 - $B \in \mathcal{M}(d \times p)$ is the control matrix (acceleration-channel where enter the control)
 - $C \in \mathcal{M}(m \times m)$ is the covariance of the noise
 - $L \in \mathcal{M}(d \times m)$ is the noise matrix (acceleration-channel where enter the noise).
-which is discretized using a semin-implicit scheme as follows:
-$$v_{k+1}=v_k+f(x_t,v_t,u_t)\delta t+Lw_t; \quad x_{k+1}=x_k+v_{k+1}\delta t; \quad w_t \sim \mathcal{N}(0,C)$$
+  
+The dynamic is integrated with a step $dt$ with a semi-implicit scheme:
+$$v_{k+1}=v_k+f(x_t,v_t)dt+Bu_tdt+Lw_t; \quad x_{k+1}=x_k+v_{k+1}dt; \quad w_t \sim \mathcal{N}(0,C)$$
 
 ## python files
 The source of the KL controller for the inverted pendulum problem.
