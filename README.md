@@ -20,7 +20,7 @@ where
 - $C \in \mathcal{M}(m \times m)$ is the covariance of the noise
 - $L \in \mathcal{M}(d \times m)$ is the noise matrix (acceleration-channel where enter the noise).
   
-The dynamic is integrated with a step $\mathrm{dt}$ with a semi-implicit scheme:
+The dynamic is integrated with a step $\mathrm{dt}$ with a semi-implicit Euler-Maruyama scheme:
 $$p_{k+1}=p_k+f(x_k,p_k)\mathrm{dt}+Bu_k\mathrm{dt}+Lw_k; \quad x_{k+1}=x_k+p_{k+1}\mathrm{dt}; \quad w_k \sim \mathcal{N}(0,C\mathrm{dt})$$
 
 ### Linear case:
