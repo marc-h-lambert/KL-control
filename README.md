@@ -29,7 +29,7 @@ $$\pmatrix{x_{k+1} \\\ p_{k+1}}= \pmatrix{x_{k} \\\ p_{k}} + \pmatrix{ (0, I_d) 
 which takes the form $X_{k+1} =\mathcal{A}X_k+ \mathcal{B}u_k+\nu_k$ where $X_k=\pmatrix{x_{k} \\\ p_{k}}$, $\mathcal{A}=I_{2d} + \pmatrix{ (0, I_d) \\\ F }\mathrm{dt}$,  $\mathcal{B}=\pmatrix{(0) \\\ B} \mathrm{dt}$ and $\nu_k=\pmatrix{(0) \\\ Lw_k}$.
 
 ## Model of the controller
-The controller is minimizing the finite-time continuous loss: $\int_0^T \ell(x_t,p_t,u_t,t)dt +V_T(x_T,p_T)$ which writes in discrete-time state-space represntation with a step $\mathrm{dt}$ where $N\mathrm{dt}=T$:
+The controller is minimizing the finite-time continuous loss: $\int_0^T \ell(x_t,p_t,u_t,t)dt +V_T(x_T,p_T)$ which writes in discrete-time state-space representation with a step $\mathrm{dt}$ and with $N:=T/\mathrm{dt}$:
 $$\sum_{k=0}^{N-1} \ell(X_k,u_k,k) \mathrm{dt} + V_N(X_N)$$
 
 ### LQR case:
