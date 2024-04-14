@@ -9,7 +9,7 @@ The code is available in python using the standard library.
 
 ## Model of the stochastic dynamic
 ### Affine control:
-The stochastic dynamic is described by a Langevin SDE with a Brownian motion $W_t$ supposed only perturbing the acceleration $a_t$:
+The stochastic dynamic is described by a Langevin SDE with a Brownian motion $W_t$ supposed only supposed only to disrupt acceleration:
 $$dv_t=a_tdt=f(x_t,v_t)dt +Bu_tdt+L\sqrt{C}dW_t; \quad dx_t=v_tdt,$$
 where 
 - $x_t,v_t,a_t \in \mathbb{R}^d$ are the position, velocity and acceleration vectors
