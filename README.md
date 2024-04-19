@@ -5,7 +5,8 @@
 This is the companion code for the paper \[[1] (To appear) \]. Please cite this paper if you use this code.  
 
 ## Installation
-The code is available in python using the standard library. 
+The standalone file is available in python using the standard library. 
+The control library uses Sympy for the differentiation of the gradient and the Hessian. 
 
 ## Model of the stochastic dynamic
 ### Affine control:
