@@ -5,12 +5,12 @@
 This is the companion code for the paper \[[1] (To appear) \]. Please cite this paper if you use this code.  
 
 ## Running code
-The standalone file \[[VariationalDP][2]\] is available in python using the standard library. 
-The control library embeds dependencies on Sympy (https://docs.sympy.org/latest/install.html) 
-for the differentiation of the gradient and the Hessian. 
+You can run the file \[[VariationalDP][2]\] which contains all the code in one file 
+to reproduce the results of the paper. The code has been rewritten in class for easier support: the classes are tested 
+in \[[TestPendulumLQR][3]\]  for the LQR regulator and in \[[TestPendulumKLcontrol][4]\] for the Variational controller.
 
 ## Installation
-The standalone file  is available in python using the standard library. 
+The standalone file \[[VariationalDP][2]\]  is available in python using the standard library. 
 The control library embeds dependencies on Sympy (https://docs.sympy.org/latest/install.html) 
 for the differentiation of the gradient and the Hessian. 
 
