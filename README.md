@@ -35,7 +35,7 @@ The controller is minimizing the finite-time continuous loss: $\int_0^T \ell(x_t
 $$\sum_{k=0}^{N-1} \ell(X_k,u_k,k\mathrm{dt}) \mathrm{dt} + V_N(X_N)$$
 
 ### LQR case:
-In the LQR case the loss is:
+In the LQR case and for our variational controler the loss is:
 $$\sum_{k=0}^{N-1} (X_k^T Q X_k+u_k^TR   u_k)\mathrm{dt} + X_N^TV_NX_N,$$
 where
 - $Q \in \mathcal{M}(2d \times 2d)$ is the matrix of the quadratic form associated with the transition state-cost 
