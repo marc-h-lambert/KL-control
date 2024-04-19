@@ -41,6 +41,7 @@ class KLcontrol(StochasticController):
         self.xT=xT
         self.eps=epsilon
         self.randomControl=randomControl
+        self.autoGrad=autoGrad
         transitionCost=lambda X,u,t: X.T.dot(self.Q.dot(X))+u.T.dot(self.R.dot(u))
         finalCost = lambda X: X.T.dot(self.VT.dot(X))
         super().__init__(system, p, transitionCost, finalCost, T)
