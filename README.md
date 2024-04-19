@@ -4,7 +4,7 @@
 
 This is the companion code for the paper \[[1] (To appear) \]. Please cite this paper if you use this code.  
 
-## Running code
+## Python files
 You can run the file \[[VariationalDP][2]\] which contains all the code in one file 
 to reproduce the results of the paper. The code has been rewritten in a library-class \[[ControlLibrary][3]\]  for easier support: the classes are tested 
 in \[[TestPendulumLQR][4]\]  for the LQR regulator and in \[[TestPendulumKLcontrol][5]\] for the Variational controller.
@@ -48,9 +48,6 @@ where
 - $Q \in \mathcal{M}(2d \times 2d)$ is the matrix of the quadratic form associated with the transition state-cost 
 - $R \in \mathcal{M}(m \times m)$ is the matrix of the quadratic form associated with the transition control cost (cost in energy) 
 - $V_N \in \mathcal{M}(2d \times 2d)$ is the matrix of the quadratic form associated with the instantaneous final cost (or final Value).
-  
-## python files
-The source of the KL controller for the inverted pendulum problem.
 
 \[1\]: ["Variational Dynamic Programming for Stochastic Optimal Control.  Marc Lambert, Francis Bach, Silvère Bonnabel.Submitted to IEEE CDC 2024 "][0] 
 [0]: https://arxiv.org/abs/ (To appear)
