@@ -184,6 +184,7 @@ if __name__ == "__main__":
     if "TestSymbolicCalculus" in TEST:
         eta = 6 * deg * 6 * deg
         pend = Pendulum(m, l, xi, theta0, dtheta0, eta, dt, invertedPendulum=True)
+        pend.initializeAuto()
         B = np.array([[1 / (m * l * l)]])  # control matrix
         L = np.identity(1)
         C = np.identity(1) * eta
