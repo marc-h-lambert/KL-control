@@ -6,7 +6,7 @@ This is the companion code for the paper \[[1] (To appear) \]. Please cite this 
 
 ## Python files
 You can run the file \[[VariationalDP][2]\] which contains all the code in one file 
-to reproduce the results of the paper. The code has been rewritten in a library-class \[[ControlLibrary][3]\]  for easier support: the classes are tested 
+to reproduce the results of the paper. The code is also available as a library-class \[[ControlLibrary][3]\]  for easier support: the classes are tested 
 in \[[TestPendulumLQR][4]\]  for the LQR regulator and in \[[TestPendulumKLcontrol][5]\] for the Variational controller.
 
 ## Installation
