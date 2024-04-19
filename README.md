@@ -52,10 +52,8 @@ where
 ## python files
 The source of the KL controller for the inverted pendulum problem.
 
+\[1\]: ["Variational Dynamic Programming for Stochastic Optimal Control.  Marc Lambert, Francis Bach, Silvère Bonnabel.Submitted to IEEE CDC 2024 "][0] 
 [0]: https://arxiv.org/abs/ (To appear)
-
-\[1\]: ["Variational Dynamic Programming for Stochastic Optimal Control.  Marc Lambert, Francis Bach, Silvère Bonnabel.Submitted to IEEE CDC 2024 "][4] 
-
 [2]: ./VariationalDP.py
 [3]: ./ControlLibrary
 [4]: ./TestPendulumLQR.py
