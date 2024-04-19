@@ -4,8 +4,13 @@
 
 This is the companion code for the paper \[[1] (To appear) \]. Please cite this paper if you use this code.  
 
+## Running code
+The standalone file \[[VariationalDP][2]\] is available in python using the standard library. 
+The control library embeds dependencies on Sympy (https://docs.sympy.org/latest/install.html) 
+for the differentiation of the gradient and the Hessian. 
+
 ## Installation
-The standalone file is available in python using the standard library. 
+The standalone file  is available in python using the standard library. 
 The control library embeds dependencies on Sympy (https://docs.sympy.org/latest/install.html) 
 for the differentiation of the gradient and the Hessian. 
 
@@ -50,3 +55,8 @@ The source of the KL controller for the inverted pendulum problem.
 [0]: https://arxiv.org/abs/ (To appear)
 
 \[1\]: ["Variational Dynamic Programming for Stochastic Optimal Control.  Marc Lambert, Francis Bach, Silvère Bonnabel.Submitted to IEEE CDC 2024 "][4] 
+
+[2]: ./VariationalDP.py
+[3]: ./ControlLibrary
+[4]: ./TestPendulumLQR.py
+[5]: ./TestPendulumKLcontrol.py
