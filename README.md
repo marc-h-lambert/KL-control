@@ -50,7 +50,8 @@ where
 - $V_N \in \mathcal{M}(2d \times 2d)$ is the matrix of the quadratic form associated with the instantaneous final cost (or final Value).
 
 \[1\]: ["Variational Dynamic Programming for Stochastic Optimal Control.  Marc Lambert, Francis Bach, Silvère Bonnabel.Submitted to IEEE CDC 2024 "][0] 
-[0]: https://arxiv.org/abs/ (To appear)
+
+[0]: https://arxiv.org/abs/ 
 [2]: ./VariationalDP.py
 [3]: ./ControlLibrary
 [4]: ./TestPendulumLQR.py
