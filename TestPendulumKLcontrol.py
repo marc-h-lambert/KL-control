@@ -72,7 +72,7 @@ def plotStatsTraj(ax,trajMC, controlsMC, valueMC):
 # MAIN PROGRAM
 ###########################################################################################################
 if __name__ == "__main__":
-    TEST=["TestSymbolicCalculus"]
+    TEST=["TestPendulumKL"]
     num=0
     seed=10
     dt=0.01
@@ -191,7 +191,7 @@ if __name__ == "__main__":
         p = 10
         VT = np.identity(2) * p
         epsilon = 6 * deg * 6 * deg
-        controller = KLcontrol(pend, B, Q, R, VT, xT, T, epsilon)
+        controller = KLcontrol(pend, B, Q, R, VT, xT, T, epsilon,autoGrad=True)
         K=np.array([[1,2]])
         P=np.identity(2)
         x=np.array([7,32])
