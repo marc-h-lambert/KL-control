@@ -61,6 +61,12 @@ class ContinuousStochasticDynamicalSystem:
         p_ = X[self.d:]
         return self.controlledDynamic(x_,p_,u)
 
+    def jacobianDynamic(self,X):
+        return
+
+    def hessianDynamic(self, X):
+        return
+
     def setPolicy(self,policy: Callable):
         self.policy=policy
         u0=self.policy(self.state0,0)
@@ -159,6 +165,15 @@ class StochasticDynamicalSystem(ContinuousStochasticDynamicalSystem):
             self.Fxx.append(lambdify([X], jac.row(i).jacobian(X), "numpy"))
 
     def discreteTransition(self, X):
+        x_ = X[0:self.d].reshape(-1,1)
+        p_ = X[self.d:].reshape(-1,1)
+        u_ = np.zeros([self.dimu, 1])
+        a = self.controlledDynamic(x_, p_, u_)
+        xn = x_ + p_ * self.dt
+        pn = p_ + a * self.dt
+        return np.concatenate([xn,pn],axis=0)
+
+    def passiveDynamicAuto(self,X):
         return
 
     # discrete-transition F st Xk+1=F(Xk) (without control)
@@ -167,20 +182,22 @@ class StochasticDynamicalSystem(ContinuousStochasticDynamicalSystem):
         x_ = sym.Matrix([xi for xi in x_])
         p_=X[self.d:]
         p_ = sym.Matrix([pi for pi in p_])
-        u_ = np.zeros([self.dimu,1])
-        a=self.controlledDynamic(x_,p_,u_)
+        a=self.passiveDynamicAuto(X)
         xn = x_ + p_ * self.dt
         pn = p_ + a * self.dt
         return xn.col_join(pn)
 
     def jacobianTransition(self, X):
-        return
+        Z=np.zeros([self.d,self.d])
+        M=np.concatenate([Z,np.identity(self.d)],axis=1)
+        Jf=np.concatenate([M,self.jacobianDynamic(X)], axis=0)
+        return np.identity(2*self.d)+self.dt*Jf
 
     def jacobianTransitionAuto(self, X):
         return self.Fx(X)
 
     def hessianTransition(self, X):
-        return
+        return self.dt*self.hessianDynamic(X)
 
     def hessianTransitionAuto(self, X):
         Hess = np.zeros([2 * self.d, 2 * self.d, 2 * self.d])

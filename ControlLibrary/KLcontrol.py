@@ -29,7 +29,8 @@ class KLcontrol(StochasticController):
     # Set autoGrad=True if you want to use the symbolic calculus to compute the
     # gradient and Hessian (may be long...)
     # otherwise the system must implements the methods at hand
-    def __init__(self,system,Bp,Q,R,VT,xT,T,epsilon,randomControl=False,autoGrad=False):
+    # Xref is supposed to be an array of (T/dt) reference points
+    def __init__(self,system,Bp,Q,R,VT,Xrefs,T,epsilon,randomControl=False,autoGrad=False):
         d, p = Bp.shape
         dt=system.dt
         if autoGrad:
@@ -38,18 +39,25 @@ class KLcontrol(StochasticController):
         self.Q=Q*dt
         self.R=R*dt
         self.VT=VT
-        self.xT=xT
+        self.Xrefs=Xrefs
         self.eps=epsilon
         self.randomControl=randomControl
         self.autoGrad=autoGrad
-        transitionCost=lambda X,u,t: X.T.dot(self.Q.dot(X))+u.T.dot(self.R.dot(u))
+        transitionCost=lambda X,u,t: (X-self.Xrefs[int(t/dt),:]).T.dot(self.Q.dot(X-self.Xrefs[int(t/dt),:]))+u.T.dot(self.R.dot(u))
         finalCost = lambda X: X.T.dot(self.VT.dot(X))
         super().__init__(system, p, transitionCost, finalCost, T)
 
+    def F(self,X):
+        if self.autoGrad:
+            X = X.reshape([2 * self.system.d, ])
+            return self.system.discreteTransitionAuto(X)
+        else:
+            return self.system.discreteTransition(X)
+
     # Jacobian of the transition
     def Jf(self, X):
-        X = X.reshape([2 * self.system.d, ])
         if self.autoGrad:
+            X = X.reshape([2 * self.system.d, ])
             return self.system.jacobianTransitionAuto(X)
         else:
             return self.system.jacobianTransition(X)
@@ -92,62 +100,94 @@ class KLcontrol(StochasticController):
     def JPJ(x, Jf, P, *args):
         return Jf(x, *args).T.dot(P).dot(Jf(x, *args))
 
+    @staticmethod
+    def JPF(x, Jf, F, B, feedback, alphak, alphakk, Pkk, betak, Kk, *args):
+        return Jf(x).T.dot(Pkk).dot(F(x)+B.dot(feedback(x,alphak, betak,Kk))-alphakk)
+
     def cov(self,P):
         S = self.R + self.B.T.dot(P).dot(self.B)
         return LA.inv(S)*self.eps
 
-    def gainKL(self,xk, Pk, Pkk):
+    def gain(self,alphak, Pk, Pkk):
         S = self.R + self.B.T.dot(Pkk).dot(self.B)
+        M=LA.inv(S).dot(self.B.T).dot(Pkk)
         # compute the expectation with cubature points
-        EA = KLcontrol.fmeanCKF(self.Jf, xk, LA.cholesky(LA.inv(Pk) * self.eps))
-        return LA.inv(S).dot(self.B.T).dot(Pkk).dot(EA)
+        EJf = KLcontrol.fmeanCKF(self.Jf, alphak, LA.cholesky(LA.inv(Pk) * self.eps))
+        return M.dot(EJf)
 
-    # backward Riccati in discrete finite horizon setting (DARE=Discrete Algebraic Riccati Equation)
-    def iterateKL(self,xk,Pk, Pkk):
+    def bias(self,alphak, Pk, alphakk, Pkk):
+        S = self.R + self.B.T.dot(Pkk).dot(self.B)
+        M=LA.inv(S).dot(self.B.T).dot(Pkk)
+        # compute the expectation with cubature points
+        Ef = KLcontrol.fmeanCKF(self.F, alphak, LA.cholesky(LA.inv(Pk) * self.eps))
+        return -1*M.dot(Ef-alphakk)
+
+    def meanFeedback(self,xk, alphak, betak,Kk):
+        return betak-Kk.dot(xk-alphak).reshape(self.dimControl,1)
+
+    # variational backward propagation of the covariance Pk
+    def variationalBackwardRiccati(self,alphak, Pk, Pkk, Kk):
         covV = LA.inv(Pk) * self.eps
         sqrtV = LA.cholesky(covV)
         S = self.R + self.B.T.dot(Pkk).dot(self.B)
-        A = KLcontrol.fmeanCKF(self.Jf, xk, sqrtV)
-        M1 = KLcontrol.fmeanCKF(KLcontrol.JPJ, xk, sqrtV, self.Jf, Pkk)
-        K = self.gainKL(xk, Pk, Pkk)
-        M2 = KLcontrol.fmeanCKF(self.Hmatrix, xk, sqrtV, K, Pkk)
+        A = KLcontrol.fmeanCKF(self.Jf, alphak, sqrtV)
+        M1 = KLcontrol.fmeanCKF(KLcontrol.JPJ, alphak, sqrtV, self.Jf, Pkk)
+        M2 = KLcontrol.fmeanCKF(self.Hmatrix, alphak, sqrtV, Kk, Pkk)
         #M2 = KLcontrol.fmeanCKF(self.system.Hmatrix, xk, sqrtV, K, Pkk, self.dt)
         return self.Q - A.T.dot(Pkk).dot(self.B).dot(LA.inv(S)).dot(self.B.T).dot(Pkk).dot(A) + M1 + M2
+
+    # variational backward propagation of the mean alphak
+    def variationalBackwardMean(self, k, alphak, Pk, alphakk, Pkk,betak,Kk):
+        Ejpf = KLcontrol.fmeanCKF(KLcontrol.JPF, alphak, LA.cholesky(LA.inv(Pk) * self.eps),self.Jf, self.F, self.B,\
+                self.meanFeedback,alphak,alphakk, Pkk, betak, Kk)
+        alpha=self.Xrefs[k].reshape(-1,1)-LA.inv(self.Q).dot(Ejpf)
+        return alpha
 
     #@overrides
     def synthetizeController(self):
         N=int(self.cost.finalTime/self.dt)
         n=2*self.system.d
-        listK = np.zeros([N, self.dimControl,n])
-        listV = np.zeros([N + 1, n, n])
-        listV[N] = self.VT
+        self.listK = np.zeros([N, self.dimControl,n])
+        self.listalpha = np.zeros([N, n,1])
+        self.listbeta= np.zeros([N, self.dimControl,1])
+        self.listV = np.zeros([N + 1, n, n])
+        self.listV[N] = self.VT
         Pkk = self.VT
-        for i in range(N, 0, -1):
-            print("--- iteration N°", i)
-            ## Inner loop to find Pk (we start with LQR guess)
-            Pk=LQR.backwardDARE(self.Jf(self.xT), Pkk, self.R, self.B, self.Q)
-            for k in range(0, 10):
-                Pk = self.iterateKL(self.xT,Pk, Pkk) #xT is fixed here
-            K = self.gainKL(self.xT, Pk, Pkk)
+        alphakk=self.Xrefs[-1,:].reshape(n,1)
+        print(alphakk)
+        for k in range(N, 0, -1):
+            print("--- iteration N°", k)
+            alphak=alphakk
+            Pk=Pkk
+            #Pk=LQR.backwardDARE(self.Jf(self.xT), Pkk, self.R, self.B, self.Q)
+            for i in range(0, 10):
+                Kk = self.gain(alphak, Pk, Pkk)
+                betak = self.bias(alphak, Pk, alphakk, Pkk)
+                alphak = self.variationalBackwardMean(k-1, alphak, Pk, alphakk, Pkk,betak,Kk)
+                Pk = self.variationalBackwardRiccati(alphak, Pk, Pkk, Kk)
+            alphakk=alphak
             Pkk = Pk
-            listK[i - 1] = K
-            listV[i - 1] = Pk
-        self.listK=listK
-        self.listV=listV
+            self.listK[k - 1,:] = Kk
+            self.listbeta[k - 1,:] = betak
+            self.listalpha[k - 1,:] = alphak
+            self.listV[k - 1,:] = Pk
         super().synthetizeController()
-        return listK, listV
+        return self.listK, self.listV
 
     #@overrides
     def optimalPolicy(self,state,time):
         t=int(time/self.dt)
         K = self.listK[t]
+        state=state.reshape(-1,1)
+        alpha=self.listalpha[t]
+        beta=self.listbeta[t]
         P = self.listV[t]
-        mean_u=-K.dot(state).reshape(self.dimControl,)
+        mean_u=self.meanFeedback(state, alpha, beta,K)
         if self.randomControl:
-            u=np.random.multivariate_normal(mean_u, self.cov(P), 1)
+            u=np.random.multivariate_normal(mean_u, self.cov(P), 1).reshape(self.dimControl,1)
         else:
             u=mean_u
-        return u.reshape(self.dimControl,1)
+        return u
 
     def qValueHisto(self):
         self.system.reinitialize()
