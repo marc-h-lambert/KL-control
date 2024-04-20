@@ -77,6 +77,7 @@ if __name__ == "__main__":
     seed=10
     dt=0.01
     T=10
+    N=int(T/dt)
     np.random.seed(seed)
 
     ########## PENDULUM PARAMETERS ############
@@ -86,9 +87,7 @@ if __name__ == "__main__":
     xi = 1.  # damping
     theta0 = np.pi / 6
     dtheta0 = 0
-    thetaF = 0
-    dthetaF = 0
-    xT=np.array([thetaF,dthetaF])
+    xT=np.zeros([N,2])
 
     ########## LOSS ############
     # INIT LOSS
@@ -200,7 +199,7 @@ if __name__ == "__main__":
         print("Hessian method1=", pend.hessianTransition(x))
         print("Hessian method2=", pend.hessianTransitionAuto(x))
         print("Hmatrix method1=",pend.HmatrixValidation(x,K,P,dt))
-        print("Hmatrix method2=", controller.HmatrixAuto(x, K, P))
+        print("Hmatrix method2=", controller.Hmatrix(x, K, P))
 
 plt.show()
 
