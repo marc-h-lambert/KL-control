@@ -160,7 +160,7 @@ class KLcontrol(StochasticController):
             alphak=alphakk
             Pk=Pkk
             #Pk=LQR.backwardDARE(self.Jf(self.xT), Pkk, self.R, self.B, self.Q)
-            for i in range(0, 10):
+            for i in range(0, 1):
                 Kk = self.gain(alphak, Pk, Pkk)
                 betak = self.bias(alphak, Pk, alphakk, Pkk)
                 alphak = self.variationalBackwardMean(k-1, alphak, Pk, alphakk, Pkk,betak,Kk)
