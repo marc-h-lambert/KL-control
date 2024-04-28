@@ -51,7 +51,7 @@ where
 
 \[1\]: ["Variational Dynamic Programming for Stochastic Optimal Control.  Marc Lambert, Francis Bach, Silvère Bonnabel.Submitted to IEEE CDC 2024 "][0] 
 
-[0]: [https://arxiv.org/abs/2404.14806v1]
+[0]: [https://arxiv.org/abs/2404.14806v1][https://arxiv.org/abs/2404.14806v1]
 [2]: ./VariationalDP.py
 [3]: ./ControlLibrary
 [4]: ./TestPendulumLQR.py
