@@ -2,7 +2,7 @@
 
 ## Object
 
-This is the companion code for the paper \[1\]. Please cite this paper if you use this code.  
+This is the companion code for the paper \[1 [0]\]. Please cite this paper if you use this code.  
 
 ## Python files
 You can run the file \[[VariationalDP][2]\] which contains all the code in one file 
@@ -49,9 +49,9 @@ where
 - $R \in \mathcal{M}(m \times m)$ is the matrix of the quadratic form associated with the transition control cost (cost in energy) 
 - $V_N \in \mathcal{M}(2d \times 2d)$ is the matrix of the quadratic form associated with the instantaneous final cost (or final Value).
 
-\[1\]: ["Variational Dynamic Programming for Stochastic Optimal Control.  Marc Lambert, Francis Bach, Silvère Bonnabel.Submitted to IEEE CDC 2024 "][https://arxiv.org/abs/2404.14806v1] 
+\[1\]: ["Variational Dynamic Programming for Stochastic Optimal Control.  Marc Lambert, Francis Bach, Silvère Bonnabel.Submitted to IEEE CDC 2024 "] 
 
-[0]: [https://arxiv.org/abs/2404.14806v1][https://arxiv.org/abs/2404.14806v1]
+[0]: https://arxiv.org/abs/2404.14806v1
 [2]: ./VariationalDP.py
 [3]: ./ControlLibrary
 [4]: ./TestPendulumLQR.py
