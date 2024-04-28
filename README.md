@@ -49,7 +49,7 @@ where
 - $R \in \mathcal{M}(m \times m)$ is the matrix of the quadratic form associated with the transition control cost (cost in energy) 
 - $V_N \in \mathcal{M}(2d \times 2d)$ is the matrix of the quadratic form associated with the instantaneous final cost (or final Value).
 
-\[1\]: ["Variational Dynamic Programming for Stochastic Optimal Control.  Marc Lambert, Francis Bach, Silvère Bonnabel.Submitted to IEEE CDC 2024 "][0] 
+\[1\]: ["Variational Dynamic Programming for Stochastic Optimal Control.  Marc Lambert, Francis Bach, Silvère Bonnabel.Submitted to IEEE CDC 2024 "][https://arxiv.org/abs/2404.14806v1] 
 
 [0]: [https://arxiv.org/abs/2404.14806v1][https://arxiv.org/abs/2404.14806v1]
 [2]: ./VariationalDP.py
