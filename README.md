@@ -2,7 +2,7 @@
 
 ## Object
 
-This is the companion code for the paper \[[1]\]. Please cite this paper if you use this code.  
+This is the companion code for the paper \[1\]. Please cite this paper if you use this code.  
 
 ## Python files
 You can run the file \[[VariationalDP][2]\] which contains all the code in one file 
